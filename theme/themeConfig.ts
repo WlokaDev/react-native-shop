@@ -2,6 +2,18 @@ import { type ThemeConfig } from './types'
 
 const themeConfig = {
   colors: {
+    default: {
+      DEFAULT: '#F3F1F1',
+      foreground: {
+        DEFAULT: '#111827',
+      },
+      background: {
+        DEFAULT: '#ffffff',
+      },
+      text: {
+        DEFAULT: '#000000',
+      },
+    },
     primary: {
       DEFAULT: '#3b82f6',
       foreground: {

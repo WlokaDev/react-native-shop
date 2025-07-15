@@ -1,4 +1,4 @@
-import { NamedStyle, Props, Size, Variant } from './types'
+import { NamedStyle, Props, Size, Theme, Variant } from './types'
 import _ from 'lodash'
 import { match } from 'ts-pattern'
 import { TextStyle, ViewStyle } from 'react-native'
@@ -6,13 +6,13 @@ import { themeConfig } from './themeConfig'
 
 class ThemeBuilder<Component extends NamedStyle> {
   constructor(
-    private config: typeof themeConfig,
+    private config: Theme,
     private properties: Props<Component>,
     private style?: Component,
   ) {}
 
   public static from<Component extends NamedStyle>(
-    config: typeof themeConfig,
+    config: Theme,
     properties: Props<Component>,
     style?: Component,
   ): ThemeBuilder<Component> {
@@ -21,45 +21,11 @@ class ThemeBuilder<Component extends NamedStyle> {
 
   public buildStyles(): Component {
     if (this.isVariantableComponent(this.properties)) {
-      const { variant, color, size } = this.properties
-
-      return {
-        ...this.resolveVariant(variant, color),
-        borderRadius: this.resolveRadius(),
-        ...this.resolvePaddingBySize(size),
-        ...this.style,
-      } as Component
+      return this.buildVariantableComponent(this.properties) as Component
     }
 
     if (this.isTextableComponent(this.properties)) {
-      const { fontSize, color, backgroundColor, size } = this.properties
-
-      const styles: TextStyle = {
-        fontSize: this.config.fontSize[fontSize],
-      }
-
-      if (color) {
-        styles.color = this.getColor(color)
-      }
-
-      if (!backgroundColor) {
-        styles.color = this.config.colors.text
-      }
-
-      if (backgroundColor) {
-        const backgroundColorName = backgroundColor.split('-')[0]
-
-        styles.color = this.getColor(`${backgroundColorName}-text`)
-      }
-
-      if (size) {
-        styles.fontSize = this.resolveFontSizeBySize(size)
-      }
-
-      return {
-        ...styles,
-        ...this.style,
-      } as Component
+      return this.buildTextableComponent(this.properties) as Component
     }
 
     return {
@@ -68,7 +34,12 @@ class ThemeBuilder<Component extends NamedStyle> {
   }
 
   private resolvePaddingBySize(size: Size): ViewStyle {
-    return this.config.size[size]
+    const { paddingHorizontal, paddingVertical } = this.config.size[size]
+
+    return {
+      paddingVertical,
+      paddingHorizontal,
+    }
   }
 
   private resolveFontSizeBySize(size: Size): number {
@@ -100,13 +71,13 @@ class ThemeBuilder<Component extends NamedStyle> {
 
   private getColor(color?: string): string {
     if (!color) {
-      return this.config.colors.primary.DEFAULT
+      return this.getDefaultColor()
     }
 
     const colorConfig = _.get(this.config.colors, color.replace('-', '.'))
 
     if (!colorConfig) {
-      return this.config.colors.primary.DEFAULT
+      return this.getDefaultColor()
     }
 
     if (typeof colorConfig === 'object') {
@@ -114,6 +85,53 @@ class ThemeBuilder<Component extends NamedStyle> {
     }
 
     return colorConfig as string
+  }
+
+  private getDefaultColor(): string {
+    return this.config.colors.primary.DEFAULT
+  }
+
+  private buildVariantableComponent(props: Props<ViewStyle>): ViewStyle {
+    const { variant, color, size, isDisabled } = props
+
+    return {
+      ...this.resolveVariant(variant, color),
+      borderRadius: this.resolveRadius(),
+      ...this.resolvePaddingBySize(size),
+      ...(isDisabled ? { opacity: 0.5 } : {}),
+      ...(this.style as ViewStyle),
+    }
+  }
+
+  private buildTextableComponent(props: Props<TextStyle>): TextStyle {
+    const { fontSize, color, backgroundColor, size } = props
+
+    const styles: TextStyle = {
+      fontSize: this.config.fontSize[fontSize],
+    }
+
+    if (color && !backgroundColor) {
+      styles.color = this.getColor(color)
+    }
+
+    if (!backgroundColor) {
+      styles.color = this.config.colors.text
+    }
+
+    if (backgroundColor) {
+      const backgroundColorName = backgroundColor.split('-')[0]
+
+      styles.color = this.getColor(`${backgroundColorName}-text`)
+    }
+
+    if (size) {
+      styles.fontSize = this.resolveFontSizeBySize(size)
+    }
+
+    return {
+      ...styles,
+      ...(this.style as TextStyle),
+    }
   }
 
   private isVariantableComponent(props: any): props is Props<ViewStyle> {

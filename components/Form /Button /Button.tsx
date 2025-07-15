@@ -4,17 +4,21 @@ import { useThemeStyles } from '@/theme'
 
 const Button = ({
   variant = 'solid',
-  radius = 'sm',
+  radius = 'lg',
   fontSize = 'sm',
   color = 'primary',
   size = 'lg',
+  isDisabled = false,
   children,
   styles,
   ...props
 }: Readonly<ButtonInterface>) => {
   const buttonStyle = useThemeStyles<ViewStyle>(
-    { variant, color, radius, size },
-    styles?.button,
+    { variant, color, radius, size, isDisabled },
+    {
+      alignItems: 'center',
+      ...styles?.button,
+    },
   )
   const textStyle = useThemeStyles<TextStyle>(
     { fontSize, backgroundColor: color, size },

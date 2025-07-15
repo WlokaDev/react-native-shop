@@ -1,5 +1,6 @@
 import { TextStyle, ViewStyle } from 'react-native'
 import { ImageStyle } from 'expo-image'
+import { themeConfig } from './themeConfig'
 
 type ColorVariant = 'DEFAULT'
 
@@ -13,8 +14,9 @@ type Props<Component extends NamedStyle> = RequiredThemeProperties<Component> &
   ThemeProperties
 
 type ThemeProperties = {
-  radius?: RadiusType
+  radius?: Radius
   color?: string
+  isDisabled?: boolean
 }
 
 type RequiredThemeProperties<Component extends NamedStyle> =
@@ -36,20 +38,21 @@ type ColorConfig =
   | string
 type Variant = 'solid' | 'outline'
 type Size = 'sm' | 'md' | 'lg'
-type RadiusType = 'none' | 'sm' | 'md' | 'lg' | 'full'
+type Radius = 'none' | 'sm' | 'md' | 'lg' | 'full'
 type NamedStyle = ViewStyle | TextStyle | ImageStyle
 type BorderSize = 'none' | 'sm' | 'md' | 'lg'
 type FontSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl'
 
 interface ThemeConfig {
   colors: {
+    default: ColorConfig
     primary: ColorConfig
     secondary: ColorConfig
     danger: ColorConfig
     warning: ColorConfig
     text: string
   } & Record<string, ColorConfig>
-  radius: Record<RadiusType, number>
+  radius: Record<Radius, number>
   borderWidth: Record<BorderSize, number>
   fontSize: Record<FontSize, number>
   size: Record<
@@ -62,16 +65,19 @@ interface ThemeConfig {
   >
 }
 
+type Theme = typeof themeConfig
+
 export {
   ColorVariant,
   ColorAdditionalVariants,
   ColorConfig,
   Variant,
-  RadiusType,
+  Radius,
   NamedStyle,
   BorderSize,
   FontSize,
   ThemeConfig,
   Props,
   Size,
+  Theme,
 }
