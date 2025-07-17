@@ -11,6 +11,7 @@ export interface InputInterface
   radius?: Radius
   startContent?: ReactNode
   endContent?: ReactNode
+  fullWidth?: boolean
   styles?: {
     container?: ViewStyle
     label?: TextStyle

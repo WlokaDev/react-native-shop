@@ -3,7 +3,7 @@ import { type ThemeConfig } from './types'
 const themeConfig = {
   colors: {
     default: {
-      DEFAULT: '#F3F1F1',
+      DEFAULT: '#CFD5D9',
       foreground: {
         DEFAULT: '#111827',
       },
@@ -62,7 +62,7 @@ const themeConfig = {
         DEFAULT: '#000000',
       },
     },
-    text: '#000000',
+    text: '#27214D',
   },
   radius: {
     none: 0,
@@ -87,6 +87,11 @@ const themeConfig = {
     '3xl': 30,
   },
   size: {
+    none: {
+      paddingVertical: 0,
+      paddingHorizontal: 0,
+      fontSize: 12,
+    },
     sm: {
       paddingVertical: 10,
       paddingHorizontal: 16,

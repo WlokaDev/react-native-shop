@@ -1,6 +1,7 @@
 import { FlatList } from 'react-native'
 import { ScreenOne, ScreenTwo } from '@/features/onboarding'
 import { useRef } from 'react'
+import { router } from 'expo-router'
 
 export default function OnboardingScreen() {
   const ref = useRef<FlatList>(null)
@@ -12,6 +13,8 @@ export default function OnboardingScreen() {
           index: 1,
           animated: true,
         })
+      } else {
+        router.push('/(drawer)')
       }
     }
   }

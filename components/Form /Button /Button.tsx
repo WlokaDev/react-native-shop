@@ -1,6 +1,13 @@
-import { Pressable, Text, TextStyle, ViewStyle } from 'react-native'
+import {
+  ActivityIndicator,
+  Pressable,
+  Text,
+  TextStyle,
+  ViewStyle,
+} from 'react-native'
 import { ButtonInterface } from '@/components'
 import { useThemeStyles } from '@/theme'
+import { Fragment } from 'react'
 
 const Button = ({
   variant = 'solid',
@@ -9,6 +16,8 @@ const Button = ({
   color = 'primary',
   size = 'lg',
   isDisabled = false,
+  isLoading = false,
+  isIconOnly = false,
   children,
   styles,
   ...props
@@ -17,6 +26,9 @@ const Button = ({
     { variant, color, radius, size, isDisabled },
     {
       alignItems: 'center',
+      flexDirection: 'row',
+      columnGap: 8,
+      justifyContent: 'center',
       ...styles?.button,
     },
   )
@@ -29,8 +41,23 @@ const Button = ({
   )
 
   return (
-    <Pressable style={buttonStyle} {...props}>
-      <Text style={textStyle}>{children}</Text>
+    <Pressable
+      style={buttonStyle}
+      {...props}
+      disabled={isDisabled || isLoading}
+    >
+      {isIconOnly ? (
+        isLoading ? (
+          <ActivityIndicator />
+        ) : (
+          children
+        )
+      ) : (
+        <Fragment>
+          {isLoading && <ActivityIndicator />}
+          <Text style={textStyle}>{children}</Text>
+        </Fragment>
+      )}
     </Pressable>
   )
 }

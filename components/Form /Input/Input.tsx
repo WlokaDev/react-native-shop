@@ -13,8 +13,10 @@ const Input = ({
   size = 'md',
   radius = 'lg',
   isDisabled = false,
-  variant = 'solid',
   isInvalid = false,
+  fullWidth = false,
+  startContent,
+  endContent,
   styles,
   label,
   ...rest
@@ -23,6 +25,7 @@ const Input = ({
     {
       fontSize: 'md',
       size,
+      ...(isInvalid ? { color: 'danger' } : {}),
     },
     styles?.label,
   )
@@ -30,12 +33,14 @@ const Input = ({
     {
       size,
       radius,
-      variant,
+      variant: 'outline',
       isDisabled,
-      color: 'default',
+      color: isInvalid ? 'danger' : 'default',
     },
     {
-      ...inputStyles?.wrapper,
+      flexDirection: 'row',
+      columnGap: 8,
+      alignItems: 'center',
       ...styles?.wrapper,
     },
   )
@@ -44,11 +49,13 @@ const Input = ({
     <View
       style={{
         ...inputStyles.container,
+        ...(fullWidth ? { width: '100%' } : {}),
         ...styles?.container,
       }}
     >
       {label && <Text style={labelStyle}>{label}</Text>}
       <View style={wrapperStyle}>
+        {startContent}
         <TextInput {...rest} />
       </View>
     </View>
@@ -58,10 +65,6 @@ const Input = ({
 const inputStyles = StyleSheet.create({
   container: {
     rowGap: 8,
-  },
-  wrapper: {
-    borderColor: '#CFD5D9',
-    borderWidth: 1,
   },
 })
 

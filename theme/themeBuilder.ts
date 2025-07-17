@@ -3,18 +3,19 @@ import _ from 'lodash'
 import { match } from 'ts-pattern'
 import { TextStyle, ViewStyle } from 'react-native'
 import { themeConfig } from './themeConfig'
+import { Nullable } from '@/types'
 
 class ThemeBuilder<Component extends NamedStyle> {
   constructor(
     private config: Theme,
     private properties: Props<Component>,
-    private style?: Component,
+    private style?: Nullable<Component>,
   ) {}
 
   public static from<Component extends NamedStyle>(
     config: Theme,
     properties: Props<Component>,
-    style?: Component,
+    style?: Nullable<Component>,
   ): ThemeBuilder<Component> {
     return new ThemeBuilder<Component>(config, properties, style)
   }
@@ -146,7 +147,7 @@ class ThemeBuilder<Component extends NamedStyle> {
 const createThemeBuilder = <Component extends NamedStyle>(
   config: typeof themeConfig,
   properties: Props<Component>,
-  style?: Component,
+  style?: Nullable<Component>,
 ) => ThemeBuilder.from<Component>(config, properties, style).buildStyles()
 
 export { createThemeBuilder, ThemeBuilder }

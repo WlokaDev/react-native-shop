@@ -32,7 +32,6 @@ const ScreenOne = ({ handleNext }: Readonly<ScreenProps>) => {
       <SafeAreaView style={{ flex: 1 }}>
         <View
           style={{
-            paddingVertical: 50,
             paddingHorizontal: 24,
             rowGap: 58,
           }}

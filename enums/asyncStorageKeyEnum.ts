@@ -1,3 +1,3 @@
 export enum AsyncStorageKeyEnum {
-    IS_FIRST_LAUNCH = 'is_first_launch',
+  IS_FIRST_LAUNCH = 'is_first_launch',
 }

@@ -37,7 +37,7 @@ type ColorConfig =
   | (Record<ColorVariant, string> & ColorAdditionalVariants)
   | string
 type Variant = 'solid' | 'outline'
-type Size = 'sm' | 'md' | 'lg'
+type Size = 'none' | 'sm' | 'md' | 'lg'
 type Radius = 'none' | 'sm' | 'md' | 'lg' | 'full'
 type NamedStyle = ViewStyle | TextStyle | ImageStyle
 type BorderSize = 'none' | 'sm' | 'md' | 'lg'
