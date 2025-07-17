@@ -1,50 +1,48 @@
-# Welcome to your Expo app 👋
+# 🍔 React Native Food Ordering UI
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A clean and modern food ordering app UI built with **React Native**, featuring animated onboarding, drawer navigation,
+and product listings with smooth scrollable FlatLists. Designed as a UI concept for mobile ordering platforms like Uber
+Eats or Glovo.
 
-## Get started
+## ✨ Features
 
-1. Install dependencies
+- 🧭 **Onboarding** screens with modern layout and typography
+- 🍱 **Home screen** with recommended dished section and tab section with hottest and popular dishes
+- 📂 **Drawer navigation** for quick access to main views
+- 🎨 Soft, pastel color palette with subtle shadows for elegant UI
+- ⚡ Smooth user interaction via optimized FlatLists
+- 🔠 Animated tab switching with font-size transitions
 
-   ```bash
-   npm install
-   ```
+---
 
-2. Start the app
+## 📸 Screenshots
 
-   ```bash
-   npx expo start
-   ```
+<p float="left">
+  <img src="screenshots/onboarding_1.png" width="30%" />
+  <img src="screenshots/onboarding_2.png" width="30%" />
+  <img src="screenshots/onboarding_3.png" width="30%" />
+  <img src="screenshots/home.png" width="30%" />
+  <img src="screenshots/home_2.png" width="30%" />
+  <img src="screenshots/drawer.png" width="30%" />
+</p>
 
-In the output, you'll find options to open the app in a
+---
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## 🚀 Getting Started
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
+### 1. Clone the repository
 
 ```bash
-npm run reset-project
+git clone https://github.com/WlokaDev/react-native-shop.git
+cd react-native-shop
+yarn or npm install
+expo start
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+## 🎨 UI Inspiration / Credits
 
-## Learn more
+The UI design and layout were inspired by
+the [Mobile UI Kit – Ecommerce & Community](https://www.figma.com/design/TQ4qODI5LVHWdWRGoPA798/Mobile-UI-Kit--Ecommerce--Community-?node-id=47-3104&t=Wxzjq12qRCUZHtqr-0)
+on Figma.
 
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+All code, structure, and animations were implemented independently in React Native for learning and portfolio purposes.

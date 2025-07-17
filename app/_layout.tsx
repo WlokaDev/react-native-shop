@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { AsyncStorageKeyEnum } from '@/enums'
 import { ThemeProvider } from '@/theme'
-import ToastManager from 'toastify-react-native/components/ToastManager'
+import ToastManager from 'toastify-react-native'
 
 void SplashScreen.preventAutoHideAsync()
 
@@ -16,9 +16,7 @@ export default function RootLayout() {
   const [loaded] = useFonts({
     SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
   })
-
-  // AsyncStorage.clear()
-
+  
   useEffect(() => {
     const prepare = async () => {
       try {
